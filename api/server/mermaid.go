@@ -3,12 +3,20 @@ package server
 import (
 	"context"
 	"fmt"
+	"os"
 
+	"github.com/joho/godotenv"
 	openai "github.com/sashabaranov/go-openai"
 )
 
 func GenerateMermaid(gptRequest string, scriptResult string) string {
-	GPT_APIKEY := "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"
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
+	openai_apikey := os.Getenv("OPENAI_APIKEY")
+
 	// gptRequestとscriptResultを統合し、chatgpt APIに投げる
 
 	requestString := "以下の要望とスクリプトの出力結果を元にMermaid形式のテキストを出力せよ。\n\n"
@@ -27,7 +35,7 @@ func GenerateMermaid(gptRequest string, scriptResult string) string {
 	requestString = "Hello!"
 
 	// Request for openai API
-	client := openai.NewClient(GPT_APIKEY)
+	client := openai.NewClient(openai_apikey)
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
