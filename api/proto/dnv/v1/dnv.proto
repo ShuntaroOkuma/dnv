@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package dnv.v1;
+
+option go_package = "pkg/pb";
+
+service Dnv {
+  rpc RunScript(GetRunScript) returns (ScriptResult) {}
+  rpc GetMermaid(GetMermaidRequest) returns (Mermaid) {}
+}
+
+message GetRunScript {}
+
+message ScriptResult {
+  string scriptResult = 1;
+}
+
+message GetMermaidRequest {
+  string scriptResult = 1;
+  string gptRequest = 2;
+}
+
+message Mermaid {
+  string mermaid = 1;
+}
