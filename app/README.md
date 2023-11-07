@@ -1,9 +1,9 @@
 # Run web app with proxy
 
-## 0. Build proxy
+## 0. prepare environment
 
 ```sh
-docker build -t dnv/envoy .
+yarn install
 ```
 
 ## 1. run proxy
