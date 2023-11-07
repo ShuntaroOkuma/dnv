@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/usr/src/app
+    command: sh -c "yarn && yarn start"
+    ports:
+      - "3001:3000"

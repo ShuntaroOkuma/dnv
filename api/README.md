@@ -1,16 +1,10 @@
-- proto ファイル生成
-
-  ```bash
-  make generate.buf
-  ```
-
-- grpc サーバー起動
+- run grpc server
 
   ```bash
   make run.server
   ```
 
-- gRPCurl によるテスト
+- test using gRPCurl
 
   ```bash
   grpcurl -plaintext localhost:8888 list

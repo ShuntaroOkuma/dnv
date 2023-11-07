@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	pb "dnv/pkg/pb/proto/dnv/v1"
+	pb "dnv/pkg/proto"
 	server "dnv/server"
 )
 
@@ -27,7 +27,7 @@ func (s *DnvServer) RunScript(ctx context.Context, req *pb.GetRunScript) (*pb.Sc
 
 func (s *DnvServer) GetMermaid(ctx context.Context, req *pb.GetMermaidRequest) (*pb.Mermaid, error) {
 	return &pb.Mermaid{
-		Mermaid: server.GenerateMermaid(req.GetGptRequest(), req.GetScriptResult()),
+		Mermaid: server.GenerateMermaid(req.GetScriptResult(), req.GetGptRequest()),
 	}, nil
 }
 

@@ -1,13 +1,12 @@
-.PHONY: generate.buf
-generate.buf:
-	protoc --go_out=pkg/pb --go_opt=paths=source_relative \
-	--go-grpc_out=pkg/pb --go-grpc_opt=paths=source_relative \
-	proto/dnv/v1/*.proto
-	$(call format)
-
 .PHONY: run.server
 run.server:
 	go run main.go
+
+.PHONY: test
+test:
+	grpcurl -plaintext localhost:8888 list
+  grpcurl -plaintext localhost:8888 dnv.v1.Dnv.RunScript
+	$(call format)
 
 define format
 	@go fmt ./... 

@@ -6,10 +6,10 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	openai "github.com/sashabaranov/go-openai"
+	"github.com/sashabaranov/go-openai"
 )
 
-func GenerateMermaid(gptRequest string, scriptResult string) string {
+func GenerateMermaid(scriptResult string, gptRequest string) string {
 	err := godotenv.Load(".env")
 	if err != nil {
 		fmt.Println("Error loading .env file")
@@ -23,19 +23,17 @@ func GenerateMermaid(gptRequest string, scriptResult string) string {
 
 	requestString += "要望\n"
 
-	// requestString += gptRequest
-	requestString += "要望\n\t・好みを選べるよう３パターン出力する。ただし、どのパターンも全ての要望を満たすこと\n\t・bridgeごとに情報を整理し、その後に統合し、mermaid形式に変換する\n\t・インターフェース名、type、IPアドレスを明記する\n\t・loopbackなどできる限り多くの通信経路を表現する\n\t・subgraphを使い、全ての要素がsubgraphの中に入るようにする\n\t・Hostとコンテナは別領域として表現する\n\t・Internetへ出ていくよう表現する\n\t・稼働しているコンテナは全て表現する\n\t・パターン番号とmermaid形式のテキストのみ出力する\n"
+	requestString += gptRequest
 
 	requestString += "\n\n"
 
-	requestString += "スクリプトの出力結果\n"
+	requestString += "スクリプトの出力結果\n-----\n"
 
 	requestString += scriptResult
 
-	requestString = "Hello!"
-
 	// Request for openai API
 	client := openai.NewClient(openai_apikey)
+	fmt.Println("Start Request to openai API")
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
@@ -56,4 +54,8 @@ func GenerateMermaid(gptRequest string, scriptResult string) string {
 
 	fmt.Println(resp.Choices[0].Message.Content)
 	return resp.Choices[0].Message.Content
+
+	// fmt.Println(requestString)
+	// fmt.Println(openai_apikey)
+	// return "test"
 }
