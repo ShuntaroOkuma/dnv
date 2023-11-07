@@ -17,19 +17,23 @@ func GenerateMermaid(scriptResult string, gptRequest string) string {
 
 	openai_apikey := os.Getenv("OPENAI_APIKEY")
 
-	// gptRequestとscriptResultを統合し、chatgpt APIに投げる
-
-	requestString := "以下の要望とスクリプトの出力結果を元にMermaid形式のテキストを出力せよ。\n\n"
-
-	requestString += "要望\n"
-
+	// English
+	// Join gptRequest and scriptResult, and send to the chatgpt API
+	requestString := "Output the text in Mermaid format based on the following requests and the output of the script.\n\n"
+	requestString += "Requests\n"
 	requestString += gptRequest
-
 	requestString += "\n\n"
-
-	requestString += "スクリプトの出力結果\n-----\n"
-
+	requestString += "Script Output\n-----\n"
 	requestString += scriptResult
+
+	// Japanese
+	// gptRequestとscriptResultを統合し、chatgpt APIに投げる
+	// requestString := "以下の要望とスクリプトの出力結果を元にMermaid形式のテキストを出力せよ。\n\n"
+	// requestString += "要望\n"
+	// requestString += gptRequest
+	// requestString += "\n\n"
+	// requestString += "スクリプトの出力結果\n-----\n"
+	// requestString += scriptResult
 
 	// Request for openai API
 	client := openai.NewClient(openai_apikey)

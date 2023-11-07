@@ -51,10 +51,12 @@ export function Mermaid({ src }) {
   }, [src, valid]);
 
   return valid ? (
-    <img
-      src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`}
-      alt="loading..."
-    />
+    <div>
+      <img
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`}
+        alt="loading..."
+      />
+    </div>
   ) : (
     <>
       <div>Failed to parse Mermaid... Mermaid src is below:</div>

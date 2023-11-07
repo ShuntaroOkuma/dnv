@@ -1,13 +1,24 @@
-- run grpc server
+# Run grpc server
 
-  ```bash
-  make run.server
-  ```
+## 0. set open api key
 
-- test using gRPCurl
+- create `.env` file
+- set `OPENAI_API_KEY` in `.env` file
+- for example:
 
-  ```bash
-  grpcurl -plaintext localhost:8888 list
-  grpcurl -plaintext localhost:8888 dnv.v1.Dnv.RunScript
-  grpcurl -plaintext -d '{"scriptResult": "hoge", "gptRequest":"geho"}' localhost:8888 dnv.v1.Dnv.GetMermaid
-  ```
+```bash
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+## 1. run grpc server
+
+```bash
+make run.server
+```
+
+# 2. test using gRPCurl
+
+```bash
+grpcurl -plaintext localhost:8888 list
+grpcurl -plaintext localhost:8888 dnv.v1.Dnv.RunScript
+```
