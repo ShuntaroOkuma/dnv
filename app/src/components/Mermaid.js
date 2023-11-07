@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@mui/material";
 import mermaid from "mermaid";
 import { useRef, useEffect, useState } from "react";
 
@@ -55,12 +56,18 @@ export function Mermaid({ src }) {
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`}
         alt="loading..."
+        width={1000}
+        height={500}
       />
     </div>
   ) : (
     <>
       <div>Failed to parse Mermaid... Mermaid src is below:</div>
-      <pre>{src}</pre>
+      <Grid item width={100} display="flex" alignItems="center">
+        <Typography variant="body1" textAlign="left">
+          {src}
+        </Typography>
+      </Grid>
     </>
   );
 }

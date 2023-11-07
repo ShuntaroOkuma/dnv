@@ -1,14 +1,14 @@
 import "./App.css";
 import ScriptArea from "./components/ScriptArea";
 import MermaidArea from "./components/MermaidArea";
+import { Divider } from "@mui/material";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <MermaidArea />
-        <ScriptArea />
-      </header>
+      <MermaidArea />
+      <Divider />
+      <ScriptArea />
     </div>
   );
 }

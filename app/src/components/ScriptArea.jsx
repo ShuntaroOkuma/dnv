@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import { DnvClient } from "../proto/dnv_grpc_web_pb";
 import { GetRunScript } from "../proto/dnv_pb";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 export const ScriptArea = () => {
   const [networkLines, setNetworkLines] = useState([]);
@@ -21,7 +22,7 @@ export const ScriptArea = () => {
         console.log(response);
         const script = response.getScriptresult();
 
-        const sections = script.split("2. Docker環境のネットワーク情報");
+        const sections = script.split("2. Docker Environment");
         const networkInfo = sections[0];
         const dockerInfo = sections[1];
 
@@ -51,15 +52,21 @@ export const ScriptArea = () => {
         Run Script
       </Button>
       <div>
-        <h2>ホストマシンのネットワーク情報</h2>
-        {networkLines.map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
+        <h2>Host Environment network</h2>
+        <ul>
+          {networkLines.map((line, index) => (
+            <Typography key={index} variant="body1" textAlign="left">
+              {line}
+            </Typography>
+          ))}
+        </ul>
 
-        <h2>Docker環境のネットワーク情報</h2>
+        <h2>Docker Environment Network</h2>
         <ul>
           {dockerLines.map((line, index) => (
-            <li key={index}>{line}</li>
+            <Typography key={index} variant="body1" textAlign="left">
+              {line}
+            </Typography>
           ))}
         </ul>
       </div>

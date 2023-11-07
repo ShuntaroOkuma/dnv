@@ -4,6 +4,7 @@ import { DnvClient } from "../proto/dnv_grpc_web_pb";
 import { GetRunScript } from "../proto/dnv_pb";
 import { GetMermaidRequest } from "../proto/dnv_pb";
 import { Mermaid } from "./Mermaid";
+import { Grid } from "@mui/material";
 
 const convertStringToObject = (str) => {
   const trimmedStr = str.trim();
@@ -140,13 +141,13 @@ const MermaidArea = () => {
     // Container2_loopback[(Container2:lo:127.0.0.1)]
     // end
     // Host1_bridged --> Container1_bridged
-    // Container1_bridged -----ho> Container2_bridged
+    // Container1_bridged --> Container2_bridged
     // Container1_loopback --> Container2_loopback`,
     //   pattern2: `graph TB
     // subgraph host
     // Host1_bridged[(Host1:eth0:192.168.1.2)]
     // Host1_loopback[(Host1:lo:127.0.0.1)]
-    // Host1_bridged --> Internet
+    // Host1_bridged -->>> Internet
     // end
     // subgraph containers
     // Container1_bridged[(Container1:eth0:192.168.1.3)]
@@ -185,7 +186,16 @@ const MermaidArea = () => {
       <Button variant="contained" onClick={onClick}>
         Create Mermaid
       </Button>
-      {loading ? <p>Loading...</p> : <MermaidComponent />}
+      <Grid
+        container
+        spacing={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        mb={10}
+      >
+        {loading ? <p>Loading...</p> : <MermaidComponent />}
+      </Grid>
     </div>
   );
 };
